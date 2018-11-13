@@ -1,0 +1,7 @@
+name: bikesharing
+description: An application for sharing bikes
+dependencies:
+  frontend: bikesharing/frontend
+  iot: bikesharing/iot
+export:
+  www: $(frontend.endpoint)

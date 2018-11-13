@@ -1,0 +1,23 @@
+name: bikesharing/users
+dependencies:
+  namespace:
+    type: kubernetes/namespace
+    labels:
+      role: backend
+  db: ./db
+build:
+  type: docker
+deploy:
+  type: helm/chart
+  chart: charts/users
+  set:
+    image:
+      tag: $(build.image):$(build.tag)
+    ingress:
+      annotations:
+        kubernetes.io/ingress.class: $(namespace.ingress.class)
+      hosts:
+        - $(namespace.name).users.$(namespace.ingress.domain)
+  target: namespace
+export:
+  endpoint: http://$(namespace.name).users.$(namespace.ingress.domain)

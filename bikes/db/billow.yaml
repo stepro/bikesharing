@@ -1,0 +1,15 @@
+name: bikesharing/bikes-db
+dependencies:
+  collection:
+    type: mongodb/collection
+    labels:
+      role: bikes
+environments:
+  development:
+    deploy:
+      type: mongodb/script
+      script: testData.js
+      target: collection
+export:
+  collectionName: $(collection.name)
+  connectionString: $(collection.database.connectionString)

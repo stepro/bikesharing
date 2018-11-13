@@ -1,0 +1,23 @@
+name: bikesharing/billing
+dependencies:
+  namespace:
+    type: kubernetes/namespace
+    labels:
+      role: iot
+  bikes: bikesharing/bikes
+build:
+  type: docker
+deploy:
+  type: helm/chart
+  chart: charts/analytics
+  set:
+    image:
+      tag: $(build.image):$(build.tag)
+    ingress:
+      annotations:
+        kubernetes.io/ingress.class: $(namespace.ingress.class)
+      hosts:
+        - $(namespace.name).bikes.$(namespace.ingress.domain)
+  target: namespace
+export:
+  endpoint: http://$(namespace.name).analytics.$(namespace.ingress.domain)

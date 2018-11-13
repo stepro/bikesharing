@@ -1,0 +1,20 @@
+name: bikesharing/api
+dependencies:
+  host:
+    type: azure/web-app
+    labels:
+      role: api
+  bikes: bikesharing/bikes
+  reservations: bikesharing/reservations
+  users: bikesharing/users
+build:
+  type: docker
+deploy:
+  type: azure/web-app-container
+  appSettings:
+    BIKES_ENDPOINT: $(bikes.endpoint)
+    RESERVATIONS_ENDPOINT: $(reservations.endpoint)
+    USERS_ENDPOINT: $(users.endpoint)
+  target: host
+export:
+  endpoint: https://$(host.defaultHostName)

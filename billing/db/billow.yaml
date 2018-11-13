@@ -1,0 +1,15 @@
+name: bikesharing/billing-db
+dependencies:
+  collection:
+    type: mongodb/collection
+    labels:
+      role: billing
+environments:
+  development:
+    deploy:
+      type: mongodb/script
+      script: testData.js
+      target: collection
+export:
+  collectionName: $(collection.name)
+  connectionString: $(collection.database.connectionString)

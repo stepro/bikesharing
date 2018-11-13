@@ -1,0 +1,8 @@
+name: bikesharing/notifications
+dependencies:
+  queue:
+    type: azure/service-bus-queue
+export:
+  queueName: $(queue.name)
+  primaryConnectionString: $(queue.namespace.primaryConnectionString)
+  secondaryConnectionString: $(queue.namespace.secondaryConnectionString)
