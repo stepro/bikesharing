@@ -1,0 +1,5 @@
+name: bikesharing/device-hub
+components:
+  hub:
+    type: azure/iot-hub
+exports: $(hub)

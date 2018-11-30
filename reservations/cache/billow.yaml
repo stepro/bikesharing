@@ -1,0 +1,5 @@
+name: bikesharing/reservations-cache
+components:
+  cache:
+    type: redis
+exports: $(cache)

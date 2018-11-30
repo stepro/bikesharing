@@ -1,20 +1,22 @@
 name: bikesharing/api
 dependencies:
-  host:
-    type: azure/web-app
-    labels:
-      role: api
   bikes: bikesharing/bikes
   reservations: bikesharing/reservations
   users: bikesharing/users
-build:
-  type: docker
-deploy:
-  type: azure/web-app-container
-  appSettings:
-    BIKES_ENDPOINT: $(bikes.endpoint)
-    RESERVATIONS_ENDPOINT: $(reservations.endpoint)
-    USERS_ENDPOINT: $(users.endpoint)
-  target: host
-export:
-  endpoint: https://$(host.defaultHostName)
+components:
+  api:
+    type: web-server
+    build:
+      image: dotnet:2.1-sdk
+      commands:
+      - dotnet publish -c Release -o publish
+      result: publish
+    environment:
+      image: dotnet:2.1-aspnetcore-runtime
+      variables:
+        BIKES_ENDPOINT: $(bikes.endpoint)
+        RESERVATIONS_ENDPOINT: $(reservations.endpoint)
+        USERS_ENDPOINT: $(users.endpoint)
+    command: dotnet bikesharing.dll
+exports:
+  endpoint: $(api.endpoint)

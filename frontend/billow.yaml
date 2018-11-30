@@ -1,21 +1,18 @@
 name: bikesharing/frontend
 dependencies:
-  host:
-    type: azure/storage-container
-    labels:
-      role: frontend
   api: bikesharing/api
-build:
-  type: docker
-  image: node:dubnium-alpine
-  commands:
-  - npm install
-  - npm build
-deploy:
-  type: azure/static-website
-  source: dist
-  settings:
-  - settings.js
-  target: host
-export:
-  endpoint: $(host.primaryEndpoint)
+components:
+  website:
+    type: static-web
+    build:
+      environment:
+        image: node:dubnium-alpine
+      commands:
+      - npm install
+      - npm run generate
+      result: dist
+    configure:
+    - settings.js
+    index: index.html
+exports:
+  endpoint: $(website.endpoint)

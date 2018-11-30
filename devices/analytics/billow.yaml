@@ -1,0 +1,11 @@
+name: bikesharing/device-analytics
+dependencies:
+  bikes: bikesharing/bikes
+components:
+  analyzer:
+    type: container
+    environment:
+      variables:
+        BIKES_ENDPOINT: $(bikes.endpoint)
+exports:
+  endpoint: $(analyzer.endpoint)

@@ -1,18 +1,12 @@
 name: bikesharing/billing
 dependencies:
-  namespace:
-    type: kubernetes/namespace
-    labels:
-      role: backend
-  db: ./db
-  functions: ./functions
-build:
-  type: docker
-deploy:
-  type: kubernetes/service
-  image: $(build.image):$(build.tag)
-  secrets:
-    MONGO:
-      COLLECTION_NAME: $(db.collectionName)
-      CONNECTION_STRING: $(db.connectionString)
-  target: namespace
+  sql: ./db
+components:
+  functions:
+    type: function-group
+    environment:
+      runtime: dotnet:2.1-runtime-alpine
+      variables:
+        SQL_CONNECTION_STRING: $(sql.connectionString)
+exports:
+  endpoint: $(functions.endpoint)

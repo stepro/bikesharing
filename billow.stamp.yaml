@@ -1,4 +1,0 @@
-name: bikesharing
-description: An application for sharing bikes
-export:
-  www: $(frontend.endpoint)

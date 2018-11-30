@@ -1,28 +1,23 @@
 name: bikesharing/bikes
 dependencies:
-  namespace:
-    type: kubernetes/namespace
-    labels:
-      role: backend
-  db: ./db
-  functions: ./functions
-build:
-  type: docker
-deploy:
-  type: helm/chart
-  chart: charts/bikes
-  set:
-    image:
-      tag: $(build.image):$(build.tag)
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: $(namespace.ingress.class)
-      hosts:
-        - $(namespace.name).bikes.$(namespace.ingress.domain)
-    secrets:
-      MONGO:
-        COLLECTION_NAME: $(db.collectionName)
-        CONNECTION_STRING: $(db.connectionString)
-  target: namespace
-export:
-  endpoint: http://$(namespace.name).bikes.$(namespace.ingress.domain)
+  mysql: ./db
+components:
+  api:
+    type: container
+    environment:
+      variables:
+        MYSQL_CONNECTION_STRING: $(mysql.connectionString)
+  functions:
+    type: function-group
+    directory: functions
+    build:
+      image: node:boron-alpine
+      commands:
+      - npm install
+      - npm run build
+    environment:
+      runtime: node:boron-alpine
+      variables:
+        MYSQL_CONNECTION_STRING: $(mysql.connectionString)
+exports:
+  endpoint: $(api.endpoint)

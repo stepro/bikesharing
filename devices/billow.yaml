@@ -1,0 +1,6 @@
+name: bikesharing/devices
+dependencies:
+  analytics: ./analytics
+  hub: ./hub
+exports:
+  analytics: $(analytics.endpoint)

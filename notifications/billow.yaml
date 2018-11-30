@@ -1,8 +1,18 @@
 name: bikesharing/notifications
-dependencies:
+components:
   queue:
     type: azure/service-bus-queue
-export:
-  queueName: $(queue.name)
-  primaryConnectionString: $(queue.namespace.primaryConnectionString)
-  secondaryConnectionString: $(queue.namespace.secondaryConnectionString)
+  emailAdapter:
+    type: container
+    directory: adapters/email
+    environment:
+      variables:
+        $(queue.namespace.connectionString)
+  twilioAdapter:
+    type: function-group
+    directory: adapters/twilio
+    environment:
+      variables:
+        $(queue.namespace.connectionString)
+exports:
+  connectionString: $(queue.connectionString)

@@ -1,27 +1,25 @@
 name: bikesharing/reservations
 dependencies:
-  namespace:
-    type: kubernetes/namespace
-    labels:
-      role: backend
   billing: bikesharing/billing
   bikes: bikesharing/bikes
   notifications: bikesharing/notifications
-  db: ./db
-  functions: ./functions
-build:
-  type: docker
-deploy:
-  type: helm/chart
-  chart: charts/reservations
-  set:
-    image:
-      tag: $(build.image):$(build.tag)
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: $(namespace.ingress.class)
-      hosts:
-        - $(namespace.name).reservations.$(namespace.ingress.domain)
-  target: namespace
-export:
-  endpoint: http://$(namespace.name).reservations.$(namespace.ingress.domain)
+  redis: ./cache
+components:
+  type: container-group
+  containers:
+    api:
+      environment:
+        variables:
+          BILLING_ENDPOINT: $(billing.endpoint)
+          BIKES_ENDPOINT: $(bikes.endpoint)
+          NOTIFICATIONS_ENDPOINT: $(notifications.endpoint)
+          REDIS_CONNECTION_STRING: $(redis.connectionString)
+    worker:
+      build:
+        context: worker
+      environment:
+        variables:
+          BILLING_ENDPOINT: $(billing.endpoint)
+          REDIS_CONNECTION_STRING: $(redis.connectionString)
+exports:
+  endpoint: $(api.endpoint)
