@@ -1,7 +1,7 @@
 name: bikesharing/users
 type: helm
 dependencies:
-  db: ./db
+  db: bikesharing/users-db
 chart: charts/users
 set:
   image:

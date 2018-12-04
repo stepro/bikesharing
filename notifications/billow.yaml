@@ -2,13 +2,13 @@ name: bikesharing/notifications
 components:
   queue: azure/service-bus-queue
   emailAdapter:
-    directory: adapters/email
+    source: adapters/email
     environment:
       variables:
         $(queue.namespace.connectionString)
   twilioAdapter:
-    directory: adapters/twilio
     type: azure/functions
+    source: adapters/twilio
     environment:
       variables:
         $(queue.namespace.connectionString)

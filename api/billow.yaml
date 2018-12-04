@@ -11,3 +11,5 @@ environment:
   NOTIFICATIONS_CONNECTION_STRING: $(notifications.connectionString)
   RESERVATIONS_ENDPOINT: $(reservations.endpoint)
   USERS_ENDPOINT: $(users.endpoint)
+release:
+  public: true

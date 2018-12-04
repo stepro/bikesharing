@@ -2,6 +2,6 @@ name: bikesharing/billing
 dependencies:
   db:
     type: mongo
-    instance: billing
+    name: billing
 environment:
   MONGO_CONNECTION_STRING: $(db.connectionString)

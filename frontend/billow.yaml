@@ -1,8 +1,8 @@
 name: bikesharing/frontend
 dependencies:
   api: bikesharing/api
-configuration:
-- static/settings.js
+replacementFiles:
+- static/api.js
 release:
   type: static-website
   build:
@@ -11,3 +11,4 @@ release:
     - npm run build
     - npm run export
     result: out
+  public: true

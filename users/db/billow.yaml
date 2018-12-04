@@ -1,5 +1,0 @@
-name: bikesharing/users-db
-type: mssql
-schema: schema.sql
-development:
-  data: testData.sql
