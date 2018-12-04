@@ -1,0 +1,40 @@
+name: bikesharing/frontend
+# Taken from "version" property in package.json
+version: 1.0.0
+# Default type lacking other information
+type: container
+build:
+  # Default build context is current directory
+  context: .
+  # No "engine" property in package.json; use LTS alpine
+  image: node:lts-alpine
+  commands:
+  # Because package.json exists
+  - npm install
+  # Because of "build" script in package.json
+  - npm run build
+  # Default result is same as build context
+  result: .
+dependencies:
+  api: bikesharing/api
+configuration:
+- static/settings.js
+# No "engine" property in package.json; use LTS alpine
+image: node:lts-alpine
+development:
+  # Because of "dev" script in package.json
+  command: npm run dev
+release:
+  type: static-website
+  build:
+    # Default build context is current directory
+    context: .
+    # No "engine" property in package.json; use LTS alpine
+    image: node:lts-alpine
+    commands:
+    - npm install
+    - npm run build
+    - npm run export
+    result: out
+  # Because index.html exists in build result
+  indexPage: index.html

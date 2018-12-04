@@ -1,0 +1,14 @@
+{
+  "name": "bikesharing-bikes",
+  "version": "2.0.3",
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  }
+}

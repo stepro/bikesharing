@@ -1,22 +1,13 @@
 name: bikesharing/api
 dependencies:
   bikes: bikesharing/bikes
+  billing: bikesharing/billing
+  notifications: bikesharing/notifications
   reservations: bikesharing/reservations
   users: bikesharing/users
-components:
-  api:
-    type: web-server
-    build:
-      image: dotnet:2.1-sdk
-      commands:
-      - dotnet publish -c Release -o publish
-      result: publish
-    environment:
-      image: dotnet:2.1-aspnetcore-runtime
-      variables:
-        BIKES_ENDPOINT: $(bikes.endpoint)
-        RESERVATIONS_ENDPOINT: $(reservations.endpoint)
-        USERS_ENDPOINT: $(users.endpoint)
-    command: dotnet bikesharing.dll
-exports:
-  endpoint: $(api.endpoint)
+environment:
+  BIKES_ENDPOINT: $(bikes.endpoint)
+  BILLING_ENDPOINT: $(billing.endpoint)
+  NOTIFICATIONS_CONNECTION_STRING: $(notifications.connectionString)
+  RESERVATIONS_ENDPOINT: $(reservations.endpoint)
+  USERS_ENDPOINT: $(users.endpoint)

@@ -1,8 +1,0 @@
-name: bikesharing/bikes-db
-components:
-  db:
-    type: mysql
-    scripts:
-      prepare: prepare.js
-      addTestData: addTestData.js
-exports: $(db)

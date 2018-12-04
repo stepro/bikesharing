@@ -1,8 +1,0 @@
-name: bikesharing/billing-db
-components:
-  db:
-    type: sql
-    scripts:
-      prepare: prepare.js
-      addTestData: addTestData.js
-exports: $(db)

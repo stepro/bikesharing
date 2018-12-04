@@ -1,13 +1,12 @@
 name: bikesharing/users
+type: helm
 dependencies:
-  mongo: ./db
-components:
-  api:
-    type: helm
-    chart: charts/users
-    set:
-      image:
-        tag: $(build.image):$(build.tag)
-      data: $(mongo.connectionString)
+  db: ./db
+chart: charts/users
+set:
+  image:
+    tag: $(build.image):$(build.tag)
+  secrets:
+    data: $(db.connectionString)
 exports:
-  endpoint: $(api.values.ingress.hosts[0])
+  endpoint: $(self.values.ingress.hosts[0])

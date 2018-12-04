@@ -1,0 +1,11 @@
+{
+    "name": "bikesharing-notifications-email",
+    "version": "1.2.6",
+    "dependencies": {
+      "express": "^4.16.4"
+    },
+    "scripts": {
+      "start": "node server.js"
+    }
+  }
+  

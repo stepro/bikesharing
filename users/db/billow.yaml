@@ -1,9 +1,5 @@
 name: bikesharing/users-db
-components:
-  db:
-    type: mongo
-    scripts:
-      prepare: prepare.js
-      addTestData: addTestData.js
-      migrate: migrate.js
-exports: $(db)
+type: mssql
+schema: schema.sql
+development:
+  data: testData.sql

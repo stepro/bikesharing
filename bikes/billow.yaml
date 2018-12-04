@@ -1,23 +1,7 @@
 name: bikesharing/bikes
 dependencies:
-  mysql: ./db
-components:
-  api:
-    type: container
-    environment:
-      variables:
-        MYSQL_CONNECTION_STRING: $(mysql.connectionString)
-  functions:
-    type: function-group
-    directory: functions
-    build:
-      image: node:boron-alpine
-      commands:
-      - npm install
-      - npm run build
-    environment:
-      runtime: node:boron-alpine
-      variables:
-        MYSQL_CONNECTION_STRING: $(mysql.connectionString)
-exports:
-  endpoint: $(api.endpoint)
+  db:
+    type: mongo
+    instance: bikes
+environment:
+  MONGO_CONNECTION_STRING: $(db.connectionString)

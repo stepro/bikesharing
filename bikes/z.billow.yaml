@@ -1,0 +1,16 @@
+name: bikesharing/bikes
+# Taken from "version" property in package.json
+version: 2.0.3
+# Because a Dockerfile exists
+type: container
+build:
+  # Default build context is current directory
+  context: .
+  # Simply build the provided Dockerfile
+  dockerfile: Dockerfile
+dependencies:
+  db:
+    type: mongo
+    instance: bikes
+environment:
+  MONGO_CONNECTION_STRING: $(db.connectionString)

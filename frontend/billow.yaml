@@ -1,18 +1,13 @@
 name: bikesharing/frontend
 dependencies:
   api: bikesharing/api
-components:
-  website:
-    type: static-web
-    build:
-      environment:
-        image: node:dubnium-alpine
-      commands:
-      - npm install
-      - npm run generate
-      result: dist
-    configure:
-    - settings.js
-    index: index.html
-exports:
-  endpoint: $(website.endpoint)
+configuration:
+- static/settings.js
+release:
+  type: static-website
+  build:
+    commands:
+    - npm install
+    - npm run build
+    - npm run export
+    result: out

@@ -1,11 +1,8 @@
 name: bikesharing/device-analytics
+type: azure/functions
 dependencies:
+  hub: ../hub
   bikes: bikesharing/bikes
-components:
-  analyzer:
-    type: container
-    environment:
-      variables:
-        BIKES_ENDPOINT: $(bikes.endpoint)
-exports:
-  endpoint: $(analyzer.endpoint)
+environment:
+  HUB_CONNECTION_STRING: $(hub.connectionString)
+  BIKES_ENDPOINT: $(bikes.endpoint)

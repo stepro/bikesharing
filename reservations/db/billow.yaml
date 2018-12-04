@@ -1,0 +1,3 @@
+name: bikesharing/reservations-db
+type: postgres
+schema: schema.sql

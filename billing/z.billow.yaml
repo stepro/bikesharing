@@ -1,0 +1,16 @@
+name: bikesharing/billing
+# Default version lacking other information
+version: 1.0.0
+# Because a Dockerfile exists
+type: container
+build:
+  # Default build context is current directory
+  context: .
+  # Simply build the provided Dockerfile
+  dockerfile: Dockerfile
+dependencies:
+  db:
+    type: mongo
+    instance: billing
+environment:
+  MONGO_CONNECTION_STRING: $(db.connectionString)
