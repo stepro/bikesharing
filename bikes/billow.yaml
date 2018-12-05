@@ -3,5 +3,7 @@ dependencies:
   db:
     type: mongo
     name: bikes
+    requirements:
+      roles: [readWrite]
 environment:
   MONGO_CONNECTION_STRING: $(db.connectionString)

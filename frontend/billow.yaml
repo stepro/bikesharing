@@ -3,6 +3,7 @@ dependencies:
   api: bikesharing/api
 replacementFiles:
 - static/api.js
+public: true
 release:
   type: static-website
   build:
@@ -11,4 +12,3 @@ release:
     - npm run build
     - npm run export
     result: out
-  public: true

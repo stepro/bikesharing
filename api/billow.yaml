@@ -2,7 +2,10 @@ name: bikesharing/api
 dependencies:
   bikes: bikesharing/bikes
   billing: bikesharing/billing
-  notifications: bikesharing/notifications
+  notifications:
+    type: bikesharing/notifications
+    requirements:
+      claims: [send]
   reservations: bikesharing/reservations
   users: bikesharing/users
 environment:
@@ -11,5 +14,4 @@ environment:
   NOTIFICATIONS_CONNECTION_STRING: $(notifications.connectionString)
   RESERVATIONS_ENDPOINT: $(reservations.endpoint)
   USERS_ENDPOINT: $(users.endpoint)
-release:
-  public: true
+public: true

@@ -1,40 +1,48 @@
 name: bikesharing/frontend
-# Taken from "version" property in package.json
-version: 1.0.0
-# Default type lacking other information
+# Default version from "version" property in package.json
+version: 1.0.5
+# Default type when lacking other information
 type: container
 build:
   # Default build context is current directory
   context: .
-  # No "engine" property in package.json; use LTS alpine
+  # Default build image when no "engine" property in package.json
   image: node:lts-alpine
+  # Default build commands due to package.json and "build" script
   commands:
-  # Because package.json exists
   - npm install
-  # Because of "build" script in package.json
   - npm run build
-  # Default result is same as build context
+  # Default build result is same as build context
   result: .
 dependencies:
   api: bikesharing/api
 configuration:
-- static/settings.js
-# No "engine" property in package.json; use LTS alpine
-image: node:lts-alpine
+- static/api.js
+public: true
 development:
-  # Because of "dev" script in package.json
+  # Default image when no "engine" property in package.json
+  image: node:lts-alpine
+  # Default workspace maps all files in source
+  # directory to the target's working directory
+  workspace:
+  - "**:."
+  # Default command due to "dev" script in package.json
   command: npm run dev
+  # Default refresh kills "node" processes, rebuilds inline and re-runs command
+  refresh:
+    killProcesses: [node]
+    inlineRebuild: true
 release:
   type: static-website
   build:
-    # Default build context is current directory
+    # Default build context inherited from base configuration
     context: .
-    # No "engine" property in package.json; use LTS alpine
+    # Default build image inherited from base configuration
     image: node:lts-alpine
     commands:
     - npm install
     - npm run build
     - npm run export
     result: out
-  # Because index.html exists in build result
+  # Default index page because index.html exists
   indexPage: index.html

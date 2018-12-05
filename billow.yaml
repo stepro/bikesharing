@@ -2,5 +2,4 @@ name: bikesharing
 dependencies:
   frontend: bikesharing/frontend
   devices: bikesharing/devices
-exports:
-  www: $(frontend.endpoint)
+exports: frontend

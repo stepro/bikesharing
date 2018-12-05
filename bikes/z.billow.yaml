@@ -1,7 +1,7 @@
 name: bikesharing/bikes
-# Taken from "version" property in package.json
+# Default version from "version" property in package.json
 version: 2.0.3
-# Because a Dockerfile exists
+# Default type due to existence of a Dockerfile
 type: container
 build:
   # Default build context is current directory
@@ -11,6 +11,18 @@ build:
 dependencies:
   db:
     type: mongo
-    instance: bikes
+    name: bikes
+    requirements:
+      roles: [readWrite]
 environment:
   MONGO_CONNECTION_STRING: $(db.connectionString)
+development:
+  # Default workspace maps all files in source
+  # directory to the target's working directory
+  workspace:
+  - "**:."
+  # Default command due to "dev" script in package.json
+  command: npm run dev
+  # Default refresh kills "node" processes and re-runs command
+  refresh:
+    killProcesses: [node]
