@@ -3,5 +3,12 @@ dependencies:
   db:
     type: mongo
     name: billing
+    requirements:
+      roles: [readWrite]
 environment:
   MONGO_CONNECTION_STRING: $(db.connectionString)
+development:
+  refresh:
+    killProcesses: [app]
+    rebuildCommands:
+    - go install -v

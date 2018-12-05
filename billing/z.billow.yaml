@@ -1,7 +1,7 @@
 name: bikesharing/billing
-# Default version lacking other information
+# Default version when lacking other information
 version: 1.0.0
-# Because a Dockerfile exists
+# Default type due to existence of a Dockerfile
 type: container
 build:
   # Default build context is current directory
@@ -11,6 +11,17 @@ build:
 dependencies:
   db:
     type: mongo
-    instance: billing
+    name: billing
+    requirements:
+      roles: [readWrite]
 environment:
   MONGO_CONNECTION_STRING: $(db.connectionString)
+development:
+  # Default workspace maps all files in source
+  # directory to the target's working directory
+  workspace:
+  - "**:."
+  refresh:
+    killProcesses: [app]
+    rebuildCommands:
+    - go install -v
