@@ -1,6 +1,12 @@
 name: bikesharing/devices
-dependencies:
-  analytics: ./analytics
-  hub: ./hub
-exports:
-  analytics: $(analytics.endpoint)
+components:
+  hub:
+    type: azure/iot-hub
+  analytics:
+    type: azure/functions
+    dependencies:
+      bikes: bikesharing/bikes
+    environment:
+      HUB_CONNECTION_STRING: $(hub.connectionString)
+      BIKES_ENDPOINT: $(bikes.endpoint)
+exports: analytics

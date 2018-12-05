@@ -1,8 +1,0 @@
-name: bikesharing/device-analytics
-type: azure/functions
-dependencies:
-  hub: ../hub
-  bikes: bikesharing/bikes
-environment:
-  HUB_CONNECTION_STRING: $(hub.connectionString)
-  BIKES_ENDPOINT: $(bikes.endpoint)

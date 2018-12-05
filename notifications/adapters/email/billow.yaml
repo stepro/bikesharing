@@ -1,0 +1,5 @@
+name: bikesharing/notifications-email
+dependencies:
+  queue: ..
+environment:
+  QUEUE_CONNECTION_STRING: $(queue.namespace.connectionString)

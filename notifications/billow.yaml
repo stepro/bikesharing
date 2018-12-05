@@ -1,16 +1,2 @@
 name: bikesharing/notifications
-components:
-  queue: azure/service-bus-queue
-  emailAdapter:
-    source: adapters/email
-    environment:
-      variables:
-        $(queue.namespace.connectionString)
-  twilioAdapter:
-    type: azure/functions
-    source: adapters/twilio
-    environment:
-      variables:
-        $(queue.namespace.connectionString)
-exports:
-  connectionString: $(queue.connectionString)
+type: azure/service-bus-queue

@@ -1,0 +1,7 @@
+name: bikesharing/notifications-twilio
+type: azure/function-app
+dependencies:
+  queue: ..
+environment:
+  QUEUE_CONNECTION_STRING: $(queue.namespace.connectionString)
+  TWILIO_CONNECTION_STRING: $(env.twilio.connectionString)
