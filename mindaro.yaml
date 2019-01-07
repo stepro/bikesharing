@@ -2,4 +2,4 @@ name: bikesharing
 dependencies:
   frontend: bikesharing/frontend
   devices: bikesharing/devices
-exports: frontend
+export: frontend
