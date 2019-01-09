@@ -1,12 +1,10 @@
 name: bikesharing/billing
 dependencies:
-  db:
+  data:
     type: mongo
-    name: billing
-    requirements:
-      roles: [readWrite]
+    roles: [readWrite]
 environment:
-  MONGO_CONNECTION_STRING: $(db.connectionString)
+  MONGO_CONNECTION_STRING: $(data.connectionString)
 development:
   refresh:
     killProcesses: [app]

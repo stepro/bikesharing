@@ -3,9 +3,9 @@ dependencies:
   bikes: bikesharing/bikes
   billing: bikesharing/billing
   notifications:
-    type: bikesharing/notifications
-    requirements:
-      claims: [send]
+    component: bikesharing/notifications
+    queue: notifications
+    claims: [send]
   reservations: bikesharing/reservations
   users: bikesharing/users
 environment:

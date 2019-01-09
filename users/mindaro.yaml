@@ -1,12 +1,12 @@
 name: bikesharing/users
 type: helm
 dependencies:
-  db: bikesharing/users-db
+  data: bikesharing/users-db
 chart: charts/users
 set:
   image:
-    tag: $(build.image):$(build.tag)
+    tag: $(built.image)
   secrets:
-    data: $(db.connectionString)
+    data: $(data.connectionString)
 exports:
   endpoint: $(self.values.ingress.hosts[0])

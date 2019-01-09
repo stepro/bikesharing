@@ -1,7 +1,12 @@
-name: bikesharing/notifications-twilio
+name: bikesharing/notifications-twilio-adapter
 type: azure/function-app
 dependencies:
-  queue: ..
+  queue:
+    component: ../../queue
+    queue: notifications
+    claims: [listen]
+  twilio:
+    component: external/twilio
 environment:
   QUEUE_CONNECTION_STRING: $(queue.namespace.connectionString)
-  TWILIO_CONNECTION_STRING: $(env.twilio.connectionString)
+  TWILIO_CONNECTION_STRING: $(twilio.connectionString)

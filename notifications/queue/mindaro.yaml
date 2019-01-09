@@ -1,0 +1,3 @@
+name: bikesharing/notifications-queue
+type: azure/service-bus-namespace
+queues: [notifications]

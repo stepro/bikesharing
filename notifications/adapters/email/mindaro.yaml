@@ -1,5 +1,8 @@
-name: bikesharing/notifications-email
+name: bikesharing/notifications-email-adapter
 dependencies:
-  queue: ..
+  queue:
+    component: ../../queue
+    queue: notifications
+    claims: [listen]
 environment:
-  QUEUE_CONNECTION_STRING: $(queue.namespace.connectionString)
+  QUEUE_CONNECTION_STRING: $(queue.connectionString)

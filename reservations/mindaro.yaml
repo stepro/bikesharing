@@ -1,27 +1,23 @@
 name: bikesharing/reservations
-components:
+type: container-group
+dependencies:
+  billing: bikesharing/billing
+  bikes: bikesharing/bikes
+  data:
+    component: ./db
+    roles: [reader, writer]
+  notifications:
+    component: bikesharing/notifications
+    queue: notifications
+    claims: [send]
+containers:
   api:
-    dependencies:
-      db:
-        type: ./db
-        requirements:
-          roles: [reader]
-    group: default
     environment:
-      POSTGRES_CONNECTION_STRING: $(db.connectionString)
+      POSTGRES_CONNECTION_STRING: $(data.connectionString)
   engine:
-    dependencies:
-      billing: bikesharing/billing
-      bikes: bikesharing/bikes
-      notifications: bikesharing/notifications
-      db:
-        type: ./db
-        roles: [reader, writer]
     source: engine
-    group: default
     environment:
       BILLING_ENDPOINT: $(billing.endpoint)
       BIKES_ENDPOINT: $(bikes.endpoint)
       NOTIFICATIONS_ENDPOINT: $(notifications.endpoint)
-      POSTGRES_CONNECTION_STRING: $(db.connectionString)
-exports: api
+      POSTGRES_CONNECTION_STRING: $(data.connectionString)

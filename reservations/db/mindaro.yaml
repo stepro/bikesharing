@@ -1,3 +1,3 @@
-name: bikesharing/reservations-db
+name: bikesharing/reservations-data
 type: postgres
 schema: schema.sql

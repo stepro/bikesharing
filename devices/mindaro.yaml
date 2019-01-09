@@ -3,10 +3,10 @@ components:
   hub:
     type: azure/iot-hub
   analytics:
-    type: azure/functions
+    type: azure/function-app
     dependencies:
       bikes: bikesharing/bikes
     environment:
       HUB_CONNECTION_STRING: $(hub.connectionString)
       BIKES_ENDPOINT: $(bikes.endpoint)
-exports: analytics
+export: analytics

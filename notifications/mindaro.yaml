@@ -1,2 +1,6 @@
 name: bikesharing/notifications
-type: azure/service-bus-queue
+dependencies:
+  queue: ./queue
+  emailAdapter: ./adapters/email
+  twilioAdapter: ./adapters/twilio
+export: queue

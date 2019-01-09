@@ -1,6 +1,4 @@
 name: bikesharing/frontend
-# Default version from "version" property in package.json
-version: 1.0.5
 # Default type when lacking other information
 type: container
 build:
@@ -16,7 +14,7 @@ build:
   result: .
 dependencies:
   api: bikesharing/api
-configuration:
+templatedFiles:
 - static/api.js
 public: true
 development:
@@ -28,7 +26,7 @@ development:
   - "**:."
   # Default command due to "dev" script in package.json
   command: npm run dev
-  # Default refresh kills "node" processes, rebuilds inline and re-runs command
+  # Default refresh kills node processes and rebuilds inline
   refresh:
     killProcesses: [node]
     inlineRebuild: true

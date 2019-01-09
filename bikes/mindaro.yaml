@@ -1,9 +1,7 @@
 name: bikesharing/bikes
 dependencies:
-  db:
+  data:
     type: mongo
-    name: bikes
-    requirements:
-      roles: [readWrite]
+    roles: [readWrite]
 environment:
-  MONGO_CONNECTION_STRING: $(db.connectionString)
+  MONGO_CONNECTION_STRING: $(data.connectionString)

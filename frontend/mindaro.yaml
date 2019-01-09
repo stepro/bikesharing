@@ -1,7 +1,7 @@
 name: bikesharing/frontend
 dependencies:
   api: bikesharing/api
-replacementFiles:
+templatedFiles:
 - static/api.js
 public: true
 release:

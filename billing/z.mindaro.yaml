@@ -1,21 +1,17 @@
 name: bikesharing/billing
-# Default version when lacking other information
-version: 1.0.0
 # Default type due to existence of a Dockerfile
 type: container
 build:
   # Default build context is current directory
   context: .
-  # Simply build the provided Dockerfile
+  # Default builds the provided Dockerfile
   dockerfile: Dockerfile
 dependencies:
-  db:
+  data:
     type: mongo
-    name: billing
-    requirements:
-      roles: [readWrite]
+    roles: [readWrite]
 environment:
-  MONGO_CONNECTION_STRING: $(db.connectionString)
+  MONGO_CONNECTION_STRING: $(data.connectionString)
 development:
   # Default workspace maps all files in source
   # directory to the target's working directory

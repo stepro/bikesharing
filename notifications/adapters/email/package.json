@@ -1,5 +1,5 @@
 {
-    "name": "bikesharing-notifications-email",
+    "name": "bikesharing-notifications-email-adapter",
     "version": "1.2.6",
     "dependencies": {
       "express": "^4.16.4"

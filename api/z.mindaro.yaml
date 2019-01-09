@@ -1,6 +1,4 @@
 name: bikesharing/api
-# Default version when lacking other information
-version: 1.0.0
 # Default type when lacking other information
 type: container
 build:
@@ -17,9 +15,8 @@ dependencies:
   bikes: bikesharing/bikes
   billing: bikesharing/billing
   notifications:
-    type: bikesharing/notifications
-    requirements:
-      claims: [send]
+    component: bikesharing/notifications
+    claims: [send]
   reservations: bikesharing/reservations
   users: bikesharing/users
 environment:
@@ -40,7 +37,7 @@ development:
     ASPNETCORE_ENVIRONMENT: Development
   # Default command to run a .NET Core app for development
   command: dotnet run
-  # Default refresh kills "dotnet" processes and re-runs command
+  # Default refresh kills dotnet processes
   refresh:
     killProcesses: [dotnet]
 release:
@@ -52,7 +49,7 @@ release:
     # Default build commands due to existence of api.csproj
     commands:
     - dotnet publish -c Release -o .publish
-    # Default build result is based on default publish command
+    # Default build result for default publish command
     result: .publish
   # Default image from "TargetFramework" property in api.csproj
   # and reference to "Microsoft.AspNetCore.App" package
