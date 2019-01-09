@@ -6,11 +6,6 @@ build:
   context: .
   # Default build image from "TargetFramework" property in api.csproj
   image: dotnet:2.1-sdk-alpine
-  # Default build commands due to existence of api.csproj
-  commands:
-  - dotnet build
-  # Default build result is same as build context
-  result: .
 dependencies:
   bikes: bikesharing/bikes
   billing: bikesharing/billing
@@ -26,6 +21,16 @@ environment:
   RESERVATIONS_ENDPOINT: $(reservations.endpoint)
   USERS_ENDPOINT: $(users.endpoint)
 development:
+  build:
+    # Default build context inherited from base configuration
+    context: .
+    # Default build image inherited from base configuration
+    image: dotnet:2.1-sdk-alpine
+    # Default development build commands due to existence of api.csproj
+    commands:
+    - dotnet build
+    # Default build result is same as build context
+    result: .
   # Default image from "TargetFramework" property in api.csproj
   image: dotnet:2.1-sdk-alpine
   # Default workspace maps all files in source

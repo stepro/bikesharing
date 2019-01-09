@@ -4,7 +4,7 @@ COPY . .
 RUN dotnet publish -c Release -o .publish
 
 FROM dotnet:2.1-aspnetcore-runtime-alpine
-COPY mindaro.yaml /
+COPY z.mindaro.yaml /mindaro.yaml
 WORKDIR /app
 COPY --from=build /src/.publish .
-ENTRYPOINT dotnet api.dll
+ENTRYPOINT ["dotnet", "api.dll"]
