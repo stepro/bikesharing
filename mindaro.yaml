@@ -1,4 +1,5 @@
 name: bikesharing
+type: composite
 dependencies:
   frontend: bikesharing/frontend
   devices: bikesharing/devices

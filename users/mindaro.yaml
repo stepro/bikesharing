@@ -1,5 +1,5 @@
 name: bikesharing/users
-type: helm
+type: kubernetes/helm
 dependencies:
   data: bikesharing/users-db
 chart: charts/users

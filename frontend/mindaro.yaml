@@ -1,12 +1,13 @@
 name: bikesharing/frontend
+public: true
 dependencies:
   api: bikesharing/api
 templatedFiles:
 - static/api.js
-public: true
 release:
   type: static-website
   build:
+    image: node:lts-alpine
     commands:
     - npm install
     - npm run build

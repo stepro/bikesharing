@@ -1,6 +1,7 @@
 name: bikesharing/frontend
 # Default type when lacking other information
 type: container
+public: true
 build:
   # Default build context is current directory
   context: .
@@ -16,7 +17,6 @@ dependencies:
   api: bikesharing/api
 templatedFiles:
 - static/api.js
-public: true
 development:
   # Default image when no "engine" property in package.json
   image: node:lts-alpine

@@ -1,4 +1,3 @@
-name: bikesharing/api
 dependencies:
   bikes: bikesharing/bikes
   billing: bikesharing/billing

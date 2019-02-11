@@ -1,4 +1,6 @@
-name: bikesharing/billing
+type: container
+build:
+  context: .
 dependencies:
   data:
     type: mongo
@@ -6,7 +8,10 @@ dependencies:
 environment:
   MONGO_CONNECTION_STRING: $(data.connectionString)
 development:
-  refresh:
-    killProcesses: [app]
-    rebuildCommands:
-    - go install -v
+  iteration:
+    workspace:
+    - "**:."
+    refresh:
+      killProcesses: [app]
+      rebuildCommands:
+      - go install -v

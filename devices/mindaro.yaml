@@ -5,8 +5,11 @@ components:
   analytics:
     type: azure/function-app
     dependencies:
+      hub:
+        component: hub
+        policy: registryRead
       bikes: bikesharing/bikes
-    environment:
+    appSettings:
       HUB_CONNECTION_STRING: $(hub.connectionString)
       BIKES_ENDPOINT: $(bikes.endpoint)
 export: analytics

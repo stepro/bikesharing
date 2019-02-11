@@ -7,6 +7,6 @@ dependencies:
     claims: [listen]
   twilio:
     component: external/twilio
-environment:
-  QUEUE_CONNECTION_STRING: $(queue.namespace.connectionString)
+appSettings:
+  QUEUE_CONNECTION_STRING: $(queue.connectionString)
   TWILIO_CONNECTION_STRING: $(twilio.connectionString)

@@ -19,5 +19,5 @@ development:
   - "**:."
   refresh:
     killProcesses: [app]
-    rebuildCommands:
+    inlineRebuild:
     - go install -v
